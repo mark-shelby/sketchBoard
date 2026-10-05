@@ -26,14 +26,15 @@
 
             for (let i = 0; i < totalSquares; i++) {
                 // 2. Listen for the mouse button being pressed
-window.addEventListener('mousedown', () => {
-    isDragging = true;
-});
+                window.addEventListener('mousedown', () => {
+                isDragging = true;
+                });
 
-// 3. Listen for the mouse button being released
-window.addEventListener('mouseup', () => {
-    isDragging = false;
-});
+                // 3. Listen for the mouse button being released
+                window.addEventListener('mouseup', () => {
+                isDragging = false;
+                });
+
                 const square = document.createElement('div');
                 square.classList.add('square');
                 
@@ -57,7 +58,7 @@ window.addEventListener('mouseup', () => {
             if(e.buttons===0) return;
             
             const square = e.target;
-                if(e.buttons===1){
+            if(e.buttons===1){
                 if(!isDragging) return;
                 let interactions = parseInt(square.dataset.interactions);
 
@@ -74,7 +75,7 @@ window.addEventListener('mouseup', () => {
 
                 const darkness = 100 - (interactions * 10);
                 square.style.filter = `brightness(${darkness}%)`;
-        }
+            }
             else if(e.buttons===2){
                 square.style.backgroundColor = "white";
                 square.style.filter = "brightness(100%)";
