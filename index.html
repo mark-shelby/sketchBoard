@@ -11,6 +11,7 @@
     <button id="new-grid-btn">Set New Grid Size</button>
     <div id="container"></div>
     <script>
+        let isDragging=false;
         const container = document.getElementById('container');
         const newGridBtn = document.getElementById('new-grid-btn');
 
@@ -24,6 +25,15 @@
             const sizePercentage = 100 / squaresPerSide;
 
             for (let i = 0; i < totalSquares; i++) {
+                // 2. Listen for the mouse button being pressed
+window.addEventListener('mousedown', () => {
+    isDragging = true;
+});
+
+// 3. Listen for the mouse button being released
+window.addEventListener('mouseup', () => {
+    isDragging = false;
+});
                 const square = document.createElement('div');
                 square.classList.add('square');
                 
@@ -41,6 +51,7 @@
             }
         }
         function handleHover(e) {
+            if(!isDragging) return;
             const square = e.target;
             let interactions = parseInt(square.dataset.interactions);
 
