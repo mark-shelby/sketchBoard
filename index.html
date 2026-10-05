@@ -50,24 +50,36 @@ window.addEventListener('mouseup', () => {
                 container.appendChild(square);
             }
         }
+        container.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+        });
         function handleHover(e) {
-            if(!isDragging) return;
-            const square = e.target;
-            let interactions = parseInt(square.dataset.interactions);
-
-            const r = Math.floor(Math.random() * 256);
-            const g = Math.floor(Math.random() * 256);
-            const b = Math.floor(Math.random() * 256);
+            if(e.buttons===0) return;
             
-            square.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+            const square = e.target;
+                if(e.buttons===1){
+                if(!isDragging) return;
+                let interactions = parseInt(square.dataset.interactions);
 
-            if (interactions < 10) {
-                interactions++;
-                square.dataset.interactions = interactions;
+                const r = Math.floor(Math.random() * 256);
+                const g = Math.floor(Math.random() * 256);
+                const b = Math.floor(Math.random() * 256);
+                
+                square.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+
+                if (interactions < 10) {
+                    interactions++;
+                    square.dataset.interactions = interactions;
+                }
+
+                const darkness = 100 - (interactions * 10);
+                square.style.filter = `brightness(${darkness}%)`;
+        }
+            else if(e.buttons===2){
+                square.style.backgroundColor = "white";
+                square.style.filter = "brightness(100%)";
+                square.dataset.interactions = 0;
             }
-
-            const darkness = 100 - (interactions * 10);
-            square.style.filter = `brightness(${darkness}%)`;
         }
 
         newGridBtn.addEventListener('click', () => {
